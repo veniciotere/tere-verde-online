@@ -1,1 +1,21 @@
+body{
+font-family: Arial;
+margin:0;
+background:#f4f4f4;
+}
 
+nav{
+background:#2e7d32;
+padding:15px;
+}
+
+nav a{
+color:white;
+margin-right:15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+h1{
+text-align:center;
+}
