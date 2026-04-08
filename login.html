@@ -1,1 +1,17 @@
+<h2>Login Administrador</h2>
 
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="senha" placeholder="Senha">
+
+<button onclick="entrar()">Entrar</button>
+
+<script src="js/auth.js"></script>
+
+<script>
+function entrar() {
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    login(email, senha);
+}
+</script>
