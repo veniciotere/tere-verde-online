@@ -8,7 +8,20 @@
 
 <h1>Painel Admin</h1>
 
+<p id="usuarioInfo"></p>
+
 <button onclick="logout()">Sair</button>
+
+<hr>
+
+<h2>Cadastrar Novo Usuário</h2>
+
+<input id="novoUsuario" placeholder="Usuário">
+<input id="novaSenha" placeholder="Senha">
+
+<button onclick="criarUsuario()">Cadastrar</button>
+
+<hr>
 
 <h2>Cadastrar Evento</h2>
 
@@ -20,7 +33,7 @@
     <option>Inativo</option>
 </select>
 
-<button onclick="criar()">Cadastrar</button>
+<button onclick="criarEvento()">Cadastrar</button>
 
 <ul id="listaEventos"></ul>
 
@@ -28,7 +41,20 @@
 <script src="js/eventos.js"></script>
 
 <script>
-function criar() {
+// Mostrar usuário logado
+document.getElementById("usuarioInfo").innerText =
+    "Logado como: " + localStorage.getItem("usuarioLogado");
+
+// Criar usuário
+function criarUsuario() {
+    cadastrarUsuario(
+        document.getElementById("novoUsuario").value,
+        document.getElementById("novaSenha").value
+    );
+}
+
+// Criar evento
+function criarEvento() {
     adicionarEvento(
         document.getElementById("nome").value,
         document.getElementById("data").value,
