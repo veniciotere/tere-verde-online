@@ -4,20 +4,21 @@
     <title>Login</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body onload="initUsers()">
 
 <h2>Login Admin</h2>
 
-<input id="email" placeholder="Email">
+<input id="usuario" placeholder="Usuário">
 <input id="senha" type="password" placeholder="Senha">
 
 <button onclick="entrar()">Entrar</button>
 
 <script src="js/auth.js"></script>
+
 <script>
 function entrar() {
     login(
-        document.getElementById("email").value,
+        document.getElementById("usuario").value,
         document.getElementById("senha").value
     );
 }
