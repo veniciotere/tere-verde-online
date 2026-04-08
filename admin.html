@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="initUsers()">
 
 <h1>Painel Administrativo</h1>
 
@@ -15,7 +15,6 @@
 
 <hr>
 
-<!-- CADASTRAR USUÁRIO -->
 <h2>Cadastrar Usuário</h2>
 
 <input id="novoUsuario" placeholder="Usuário">
@@ -33,7 +32,6 @@
 
 <hr>
 
-<!-- EVENTOS -->
 <h2>Cadastrar Evento</h2>
 
 <input id="nome" placeholder="Nome do evento">
@@ -44,7 +42,6 @@
 <h3>Lista de Eventos</h3>
 <ul id="listaEventos"></ul>
 
-<!-- IMPORTANTE: SCRIPTS -->
 <script src="js/auth.js"></script>
 <script src="js/eventos.js"></script>
 <script src="js/admin.js"></script>
