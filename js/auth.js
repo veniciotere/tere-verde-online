@@ -1,3 +1,4 @@
+// Inicializa usuários
 function initUsers() {
     if (!localStorage.getItem("usuarios")) {
         const usuarios = [
@@ -7,6 +8,7 @@ function initUsers() {
     }
 }
 
+// LOGIN
 function login(usuario, senha) {
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
@@ -22,19 +24,30 @@ function login(usuario, senha) {
     }
 }
 
+// VERIFICA LOGIN
 function checkAuth() {
     if (localStorage.getItem("auth") !== "true") {
         window.location.href = "login.html";
     }
 }
 
+// LOGOUT
 function logout() {
-    localStorage.clear();
+    localStorage.removeItem("auth");
+    localStorage.removeItem("usuarioLogado");
+    localStorage.removeItem("perfil");
     window.location.href = "index.html";
 }
 
-// CADASTRAR USUÁRIO
+// CADASTRAR USUÁRIO (APENAS ADMIN)
 function cadastrarUsuario(usuario, senha, perfil) {
+    const perfilLogado = localStorage.getItem("perfil");
+
+    if (perfilLogado !== "admin") {
+        alert("Sem permissão!");
+        return;
+    }
+
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     const existe = usuarios.find(u => u.usuario === usuario);
@@ -47,15 +60,20 @@ function cadastrarUsuario(usuario, senha, perfil) {
     usuarios.push({ usuario, senha, perfil });
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    alert("Usuário criado!");
+    listarUsuarios();
 }
 
-// EXCLUIR USUÁRIO (SÓ MARCOS)
+// EXCLUIR USUÁRIO (SÓ ADMIN)
 function excluirUsuario(usuario) {
     const perfil = localStorage.getItem("perfil");
 
     if (perfil !== "admin") {
         alert("Sem permissão!");
+        return;
+    }
+
+    if (usuario === "Marcos") {
+        alert("Não pode excluir o usuário principal!");
         return;
     }
 
@@ -76,13 +94,20 @@ function listarUsuarios() {
     lista.innerHTML = "";
 
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const perfil = localStorage.getItem("perfil");
 
     usuarios.forEach(u => {
         const li = document.createElement("li");
 
+        let botao = "";
+
+        if (perfil === "admin" && u.usuario !== "Marcos") {
+            botao = `<button onclick="excluirUsuario('${u.usuario}')">Excluir</button>`;
+        }
+
         li.innerHTML = `
             ${u.usuario} (${u.perfil})
-            <button onclick="excluirUsuario('${u.usuario}')">Excluir</button>
+            ${botao}
         `;
 
         lista.appendChild(li);
