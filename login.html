@@ -1,17 +1,27 @@
-<h2>Login Administrador</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="senha" placeholder="Senha">
+<h2>Login Admin</h2>
+
+<input id="email" placeholder="Email">
+<input id="senha" type="password" placeholder="Senha">
 
 <button onclick="entrar()">Entrar</button>
 
 <script src="js/auth.js"></script>
-
 <script>
 function entrar() {
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
-
-    login(email, senha);
+    login(
+        document.getElementById("email").value,
+        document.getElementById("senha").value
+    );
 }
 </script>
+
+</body>
+</html>
