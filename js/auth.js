@@ -1,27 +1,24 @@
-// Usuário fake (admin)
-const adminUser = {
-    email: "admin@tereverde.com",
-    senha: "123456"
+const ADMIN = {
+    email: "admin@tere.com",
+    senha: "123"
 };
 
 function login(email, senha) {
-    if (email === adminUser.email && senha === adminUser.senha) {
-        localStorage.setItem("logado", "true");
+    if (email === ADMIN.email && senha === ADMIN.senha) {
+        localStorage.setItem("auth", "true");
         window.location.href = "admin.html";
     } else {
-        alert("Login inválido!");
+        alert("Login inválido");
     }
 }
 
-function verificarLogin() {
-    const logado = localStorage.getItem("logado");
-
-    if (!logado) {
+function checkAuth() {
+    if (localStorage.getItem("auth") !== "true") {
         window.location.href = "login.html";
     }
 }
 
 function logout() {
-    localStorage.removeItem("logado");
+    localStorage.removeItem("auth");
     window.location.href = "index.html";
 }
