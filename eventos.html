@@ -1,76 +1,43 @@
-function podeCriar() {
-    return ["admin", "editor", "basico"].includes(localStorage.getItem("perfil"));
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-function podeGerenciar() {
-    return ["admin", "editor"].includes(localStorage.getItem("perfil"));
-}
+<body>
 
-function adicionarEvento(nome, data, status) {
-    if (!podeCriar()) {
-        alert("Sem permissão");
-        return;
-    }
+<header>
+    <h1>Eventos</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="parques.html">Parques</a>
+        <a href="trilhas.html">Trilhas</a>
+        <a href="biodiversidade.html">Biodiversidade</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="login.html">Admin</a>
+    </nav>
+</header>
 
-    const eventos = getEventos();
+<h2>Eventos Disponíveis</h2>
 
-    eventos.push({
-        id: Date.now(),
-        nome,
-        data,
-        status
-    });
+<ul id="listaEventosPublico"></ul>
 
-    salvarEventos(eventos);
-    listarEventosAdmin();
-}
+<script src="js/eventos.js"></script>
 
-function deletarEvento(id) {
-    if (!podeGerenciar()) {
-        alert("Sem permissão");
-        return;
-    }
+<script>
+// MOSTRAR SÓ EVENTOS ATIVOS
+const lista = document.getElementById("listaEventosPublico");
 
-    let eventos = getEventos();
-    eventos = eventos.filter(e => e.id !== id);
-    salvarEventos(eventos);
-    listarEventosAdmin();
-}
-
-function alternarStatus(id) {
-    if (!podeGerenciar()) {
-        alert("Sem permissão");
-        return;
-    }
-
-    let eventos = getEventos();
-
-    eventos = eventos.map(e => {
-        if (e.id === id) {
-            e.status = e.status === "Ativo" ? "Inativo" : "Ativo";
-        }
-        return e;
-    });
-
-    salvarEventos(eventos);
-    listarEventosAdmin();
-}
-
-function listarEventosAdmin() {
-    const lista = document.getElementById("listaEventos");
-    if (!lista) return;
-
-    lista.innerHTML = "";
-
-    getEventos().forEach(e => {
+getEventos().forEach(e => {
+    if (e.status === "Ativo") {
         const li = document.createElement("li");
-
-        li.innerHTML = `
-            ${e.nome} - ${e.data} - ${e.status}
-            <button onclick="alternarStatus(${e.id})">Ativar/Inativar</button>
-            <button onclick="deletarEvento(${e.id})">Excluir</button>
-        `;
-
+        li.innerText = `${e.nome} - ${e.data}`;
         lista.appendChild(li);
-    });
-}
+    }
+});
+</script>
+
+</body>
+</html>
