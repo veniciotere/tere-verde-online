@@ -1,14 +1,12 @@
-// Inicializa usuários (primeira vez)
 function initUsers() {
     if (!localStorage.getItem("usuarios")) {
         const usuarios = [
-            { usuario: "Marcos", senha: "123456" }
+            { usuario: "Marcos", senha: "123456", perfil: "admin" }
         ];
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
 }
 
-// LOGIN
 function login(usuario, senha) {
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
@@ -16,29 +14,27 @@ function login(usuario, senha) {
 
     if (user) {
         localStorage.setItem("auth", "true");
-        localStorage.setItem("usuarioLogado", usuario);
+        localStorage.setItem("usuarioLogado", user.usuario);
+        localStorage.setItem("perfil", user.perfil);
         window.location.href = "admin.html";
     } else {
-        alert("Usuário ou senha inválidos");
+        alert("Login inválido");
     }
 }
 
-// VERIFICA LOGIN
 function checkAuth() {
     if (localStorage.getItem("auth") !== "true") {
         window.location.href = "login.html";
     }
 }
 
-// LOGOUT
 function logout() {
-    localStorage.removeItem("auth");
-    localStorage.removeItem("usuarioLogado");
+    localStorage.clear();
     window.location.href = "index.html";
 }
 
-// CADASTRAR NOVO USUÁRIO
-function cadastrarUsuario(usuario, senha) {
+// CADASTRAR USUÁRIO
+function cadastrarUsuario(usuario, senha, perfil) {
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     const existe = usuarios.find(u => u.usuario === usuario);
@@ -48,8 +44,47 @@ function cadastrarUsuario(usuario, senha) {
         return;
     }
 
-    usuarios.push({ usuario, senha });
+    usuarios.push({ usuario, senha, perfil });
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    alert("Usuário cadastrado com sucesso!");
+    alert("Usuário criado!");
+}
+
+// EXCLUIR USUÁRIO (SÓ MARCOS)
+function excluirUsuario(usuario) {
+    const perfil = localStorage.getItem("perfil");
+
+    if (perfil !== "admin") {
+        alert("Sem permissão!");
+        return;
+    }
+
+    let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+
+    usuarios = usuarios.filter(u => u.usuario !== usuario);
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    listarUsuarios();
+}
+
+// LISTAR USUÁRIOS
+function listarUsuarios() {
+    const lista = document.getElementById("listaUsuarios");
+    if (!lista) return;
+
+    lista.innerHTML = "";
+
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    usuarios.forEach(u => {
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            ${u.usuario} (${u.perfil})
+            <button onclick="excluirUsuario('${u.usuario}')">Excluir</button>
+        `;
+
+        lista.appendChild(li);
+    });
 }
