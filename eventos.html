@@ -20,23 +20,34 @@
     </nav>
 </header>
 
-<h2>Eventos Disponíveis</h2>
+<h2 style="text-align:center;">Eventos Disponíveis</h2>
 
-<ul id="listaEventosPublico"></ul>
+<div id="eventosContainer" class="cards"></div>
 
 <script src="js/eventos.js"></script>
 
 <script>
-// MOSTRAR SÓ EVENTOS ATIVOS
-const lista = document.getElementById("listaEventosPublico");
+const container = document.getElementById("eventosContainer");
 
 getEventos().forEach(e => {
     if (e.status === "Ativo") {
-        const li = document.createElement("li");
-        li.innerText = `${e.nome} - ${e.data}`;
-        lista.appendChild(li);
+        const card = document.createElement("div");
+        card.className = "card-evento";
+
+        card.innerHTML = `
+            <h3>${e.nome}</h3>
+            <p>📅 Data: ${formatarData(e.data)}</p>
+        `;
+
+        container.appendChild(card);
     }
 });
+
+// FORMATAR DATA BONITA
+function formatarData(data) {
+    const d = new Date(data);
+    return d.toLocaleDateString("pt-BR");
+}
 </script>
 
 </body>
