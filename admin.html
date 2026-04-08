@@ -1,19 +1,41 @@
-<body onload="verificarLogin()">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="checkAuth(); listarEventosAdmin();">
 
-<h1>Painel Administrativo</h1>
+<h1>Painel Admin</h1>
 
 <button onclick="logout()">Sair</button>
 
 <h2>Cadastrar Evento</h2>
 
-<input type="text" id="eventoNome" placeholder="Nome do evento">
-<input type="date" id="eventoData">
+<input id="nome" placeholder="Nome">
+<input type="date" id="data">
 
-<button onclick="salvarEvento()">Salvar</button>
+<select id="status">
+    <option>Ativo</option>
+    <option>Inativo</option>
+</select>
+
+<button onclick="criar()">Cadastrar</button>
 
 <ul id="listaEventos"></ul>
 
 <script src="js/auth.js"></script>
-<script src="js/app.js"></script>
+<script src="js/eventos.js"></script>
+
+<script>
+function criar() {
+    adicionarEvento(
+        document.getElementById("nome").value,
+        document.getElementById("data").value,
+        document.getElementById("status").value
+    );
+}
+</script>
 
 </body>
+</html>
