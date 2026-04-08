@@ -54,3 +54,39 @@ button{
 button:hover{
   background:#1b5e20;
 }
+
+/* CONTAINER DE CARDS */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* CARD DE EVENTO */
+.card-evento {
+    background: white;
+    width: 250px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* HOVER BONITO */
+.card-evento:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* TÍTULO */
+.card-evento h3 {
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+/* TEXTO */
+.card-evento p {
+    font-size: 14px;
+}
