@@ -54,7 +54,7 @@ function alternarStatus(id) {
     listarEventosAdmin();
 }
 
-// LISTAR EVENTOS NO ADMIN
+// LISTAR EVENTOS
 function listarEventosAdmin() {
     const lista = document.getElementById("listaEventos");
     if (!lista) return;
@@ -74,6 +74,7 @@ function listarEventosAdmin() {
         }
 
         const li = document.createElement("li");
+
         li.innerHTML = `
             ${e.nome} - ${e.data} - ${e.status}
             ${botoes}
