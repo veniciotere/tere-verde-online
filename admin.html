@@ -1,67 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body onload="checkAuth(); listarEventosAdmin();">
-
-<h1>Painel Admin</h1>
-
-<p id="usuarioInfo"></p>
-
-<button onclick="logout()">Sair</button>
-
-<hr>
-
-<h2>Cadastrar Novo Usuário</h2>
+<h2>Cadastrar Usuário</h2>
 
 <input id="novoUsuario" placeholder="Usuário">
 <input id="novaSenha" placeholder="Senha">
 
-<button onclick="criarUsuario()">Cadastrar</button>
-
-<hr>
-
-<h2>Cadastrar Evento</h2>
-
-<input id="nome" placeholder="Nome">
-<input type="date" id="data">
-
-<select id="status">
-    <option>Ativo</option>
-    <option>Inativo</option>
+<select id="perfil">
+    <option value="editor">Editor</option>
+    <option value="basico">Básico</option>
 </select>
 
-<button onclick="criarEvento()">Cadastrar</button>
+<button onclick="criarUsuario()">Cadastrar</button>
 
-<ul id="listaEventos"></ul>
-
-<script src="js/auth.js"></script>
-<script src="js/eventos.js"></script>
-
-<script>
-// Mostrar usuário logado
-document.getElementById("usuarioInfo").innerText =
-    "Logado como: " + localStorage.getItem("usuarioLogado");
-
-// Criar usuário
-function criarUsuario() {
-    cadastrarUsuario(
-        document.getElementById("novoUsuario").value,
-        document.getElementById("novaSenha").value
-    );
-}
-
-// Criar evento
-function criarEvento() {
-    adicionarEvento(
-        document.getElementById("nome").value,
-        document.getElementById("data").value,
-        document.getElementById("status").value
-    );
-}
-</script>
-
-</body>
-</html>
+<h3>Usuários cadastrados</h3>
+<ul id="listaUsuarios"></ul>
