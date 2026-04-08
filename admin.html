@@ -1,4 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Painel Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h1>Painel Administrativo</h1>
+
+<p id="usuarioInfo"></p>
+
+<button onclick="logout()">Sair</button>
+
+<hr>
+
+<!-- CADASTRAR USUÁRIO -->
+<h2>Cadastrar Usuário</h2>
+
+<input id="novoUsuario" placeholder="Usuário">
+<input id="novaSenha" placeholder="Senha">
+
 <select id="perfil">
     <option value="basico">Básico</option>
     <option value="admin">Admin</option>
 </select>
+
+<button onclick="criarUsuario()">Cadastrar Usuário</button>
+
+<h3>Lista de Usuários</h3>
+<ul id="listaUsuarios"></ul>
+
+<hr>
+
+<!-- EVENTOS -->
+<h2>Cadastrar Evento</h2>
+
+<input id="nome" placeholder="Nome do evento">
+<input type="date" id="data">
+
+<button onclick="criarEvento()">Cadastrar Evento</button>
+
+<h3>Lista de Eventos</h3>
+<ul id="listaEventos"></ul>
+
+<!-- IMPORTANTE: SCRIPTS -->
+<script src="js/auth.js"></script>
+<script src="js/eventos.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>
