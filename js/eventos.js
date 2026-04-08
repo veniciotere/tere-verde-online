@@ -1,12 +1,14 @@
+// PEGAR EVENTOS
 function getEventos() {
     return JSON.parse(localStorage.getItem("eventos")) || [];
 }
 
+// SALVAR EVENTOS
 function salvarEventos(eventos) {
     localStorage.setItem("eventos", JSON.stringify(eventos));
 }
 
-// TODOS podem criar
+// CRIAR EVENTO (TODOS PODEM)
 function adicionarEvento(nome, data, status) {
     const eventos = getEventos();
 
@@ -21,7 +23,7 @@ function adicionarEvento(nome, data, status) {
     listarEventosAdmin();
 }
 
-// SÓ ADMIN pode excluir
+// EXCLUIR EVENTO (SÓ ADMIN)
 function deletarEvento(id) {
     if (localStorage.getItem("perfil") !== "admin") {
         alert("Sem permissão!");
@@ -30,11 +32,12 @@ function deletarEvento(id) {
 
     let eventos = getEventos();
     eventos = eventos.filter(e => e.id !== id);
+
     salvarEventos(eventos);
     listarEventosAdmin();
 }
 
-// SÓ ADMIN pode ativar/inativar
+// ATIVAR / INATIVAR (SÓ ADMIN)
 function alternarStatus(id) {
     if (localStorage.getItem("perfil") !== "admin") {
         alert("Sem permissão!");
@@ -54,7 +57,7 @@ function alternarStatus(id) {
     listarEventosAdmin();
 }
 
-// LISTAR EVENTOS
+// LISTAR EVENTOS NO ADMIN
 function listarEventosAdmin() {
     const lista = document.getElementById("listaEventos");
     if (!lista) return;
